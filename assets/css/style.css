@@ -118,8 +118,6 @@ header h5{
     max-width: 24px;
     margin-right:1rem;
 }
-
-
 .datetime{
     grid-column: 3;
     grid-row: 1;
@@ -128,4 +126,54 @@ header h5{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.standings {
+    width:100%;
+    background: rgba(245,245,245,1);
+    border-collapse: collapse;
+}
+.standings th{
+    font-weight: normal;
+    font-size:.875rem;
+    height:40px;
+}
+.standings td{
+    height: 40px;
+    border-bottom:1px solid rgba(215,215,215,1);
+}
+.standings th, .standings tr:hover td{
+    color:rgba(255,255,255,1);
+    background:rgba(23,23,23,1);
+}
+.standings tr:last-child td,
+.standings tr td:first-child{
+    border-color:transparent;
+}
+.standings .col {
+    text-align: center;
+    width:3rem;
+}
+.standings th:not(.col){
+    text-align: left;
+}
+.ucl, .uel, .goodbye{
+    width:3px;
+    height:40px;
+}
+.ucl{
+    background:rgba(66,133,244,1);
+}
+.uel{
+    background:rgba(250, 123, 23, 1);
+}
+.goodbye{
+    background: rgba(234, 67, 53, 1);
+}
+.results{
+    display:flex;
+    margin-right:10px;
+}
+.result{
+    padding:1px;
 }
