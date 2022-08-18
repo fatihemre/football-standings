@@ -1,240 +1,70 @@
+<?php
+$sth = $db->prepare("SELECT * FROM fixture_view WHERE fixture_id=:fixture_id AND week=:week");
+$sth->execute(['fixture_id'=>ACTIVE_FIXTURE_ID, 'week'=>1]);
+$matches = $sth->fetchAll(\PDO::FETCH_OBJ);
+?>
 <header>
     <h5>Haftanın Maçları</h5>
 </header>
 <section>
-
     <div class="fixture">
         <div class="week">
             Maç 1/38
         </div>
         <div class="matches">
+            <?php
+            $today = new DateTime('now');
+            foreach($matches as $match):
+                $match_day = new DateTime($match->match_day);
+                $is_played = $match_day < $today;
+            ?>
             <div class="match">
                 <div class="clubs">
                     <div class="club">
                         <div class="home">
-                            <img src="assets/images/clubs/shield.png" alt="">
-                            <div class="team">Ümraniyespor</div>
+                            <?php
+                            $arma = file_exists(__DIR__.'/assets/images/clubs/'. strtolower($match->home_team_short_code) .'.png') ?
+                            'assets/images/clubs/'. strtolower($match->home_team_short_code) .'.png' :
+                            'assets/images/clubs/shield.png';
+                            ?>
+
+                            <img src="<?php echo $arma; ?>" alt="<?php echo $match->home_team_name;?> Arması">
+                            <div class="team">
+                                <?php echo $match->home_team_name; ?>
+                            </div>
                         </div>
-                        <div class="score">0</div>
+                        <div class="score">
+                            <?php echo $is_played ? $match->home_team_score : '-'; ?>
+                            <?php if($match->home_team_score > $match->away_team_score): ?>
+                                <svg class="winner" aria-label="Winner" height="8" role="img" width="6"><polygon fill="#262626" points="6,0 6,8 0,4"></polygon></svg>
+                            <?php endif; ?>
+                        </div>
                     </div>
                     <div class="club">
                         <div class="away">
-                            <img src="assets/images/clubs/galatasaray_48x48.png" alt="">
-                            <div class="team">Galatasaray</div>
+                            <?php
+                            $arma = file_exists(__DIR__.'/assets/images/clubs/'. $match->away_team_short_code .'.png') ?
+                                'assets/images/clubs/'. strtolower($match->away_team_short_code) .'.png' :
+                                'assets/images/clubs/shield.png';
+                            ?>
+
+                            <img src="<?php echo $arma; ?>" alt="<?php echo $match->away_team_name;?> Arması">
+                            <div class="team"><?php echo $match->away_team_name; ?></div>
                         </div>
                         <div class="score">
-                            5
-                            <svg class="winner" aria-label="Winner" height="8" role="img" width="6"><polygon fill="#262626" points="6,0 6,8 0,4"></polygon></svg>
+                            <?php echo $is_played ? $match->away_team_score : '-'; ?>
+                            <?php if($match->away_team_score > $match->home_team_score): ?>
+                                <svg class="winner" aria-label="Winner" height="8" role="img" width="6"><polygon fill="#262626" points="6,0 6,8 0,4"></polygon></svg>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
                 <div class="datetime">
-                    <div>19/08 Cuma</div>
-                    <div>21:00</div>
+                    <div><?php echo date('d/m D', strtotime($match->match_day)); ?></div>
+                    <div><?php echo date('H:i', strtotime($match->match_day)); ?></div>
                 </div>
             </div>
-            <div class="match">
-                <div class="clubs">
-                    <div class="club">
-                        <div class="home">
-                            <img src="assets/images/clubs/shield.png" alt="">
-                            <div class="team">Ümraniyespor</div>
-                        </div>
-                        <div class="score">0</div>
-                    </div>
-                    <div class="club">
-                        <div class="away">
-                            <img src="assets/images/clubs/galatasaray_48x48.png" alt="">
-                            <div class="team">Galatasaray</div>
-                        </div>
-                        <div class="score">
-                            5
-                            <svg class="winner" aria-label="Winner" height="8" role="img" width="6"><polygon fill="#262626" points="6,0 6,8 0,4"></polygon></svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="datetime">
-                    <div>19/08 Cuma</div>
-                    <div>21:00</div>
-                </div>
-            </div>
-            <div class="match">
-                <div class="clubs">
-                    <div class="club">
-                        <div class="home">
-                            <img src="assets/images/clubs/shield.png" alt="">
-                            <div class="team">Ümraniyespor</div>
-                        </div>
-                        <div class="score">0</div>
-                    </div>
-                    <div class="club">
-                        <div class="away">
-                            <img src="assets/images/clubs/galatasaray_48x48.png" alt="">
-                            <div class="team">Galatasaray</div>
-                        </div>
-                        <div class="score">
-                            5
-                            <svg class="winner" aria-label="Winner" height="8" role="img" width="6"><polygon fill="#262626" points="6,0 6,8 0,4"></polygon></svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="datetime">
-                    <div>19/08 Cuma</div>
-                    <div>21:00</div>
-                </div>
-            </div>
-            <div class="match">
-                <div class="clubs">
-                    <div class="club">
-                        <div class="home">
-                            <img src="assets/images/clubs/shield.png" alt="">
-                            <div class="team">Ümraniyespor</div>
-                        </div>
-                        <div class="score">0</div>
-                    </div>
-                    <div class="club">
-                        <div class="away">
-                            <img src="assets/images/clubs/galatasaray_48x48.png" alt="">
-                            <div class="team">Galatasaray</div>
-                        </div>
-                        <div class="score">
-                            5
-                            <svg class="winner" aria-label="Winner" height="8" role="img" width="6"><polygon fill="#262626" points="6,0 6,8 0,4"></polygon></svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="datetime">
-                    <div>19/08 Cuma</div>
-                    <div>21:00</div>
-                </div>
-            </div>
-            <div class="match">
-                <div class="clubs">
-                    <div class="club">
-                        <div class="home">
-                            <img src="assets/images/clubs/shield.png" alt="">
-                            <div class="team">Ümraniyespor</div>
-                        </div>
-                        <div class="score">0</div>
-                    </div>
-                    <div class="club">
-                        <div class="away">
-                            <img src="assets/images/clubs/galatasaray_48x48.png" alt="">
-                            <div class="team">Galatasaray</div>
-                        </div>
-                        <div class="score">
-                            5
-                            <svg class="winner" aria-label="Winner" height="8" role="img" width="6"><polygon fill="#262626" points="6,0 6,8 0,4"></polygon></svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="datetime">
-                    <div>19/08 Cuma</div>
-                    <div>21:00</div>
-                </div>
-            </div>
-            <div class="match">
-                <div class="clubs">
-                    <div class="club">
-                        <div class="home">
-                            <img src="assets/images/clubs/shield.png" alt="">
-                            <div class="team">Ümraniyespor</div>
-                        </div>
-                        <div class="score">0</div>
-                    </div>
-                    <div class="club">
-                        <div class="away">
-                            <img src="assets/images/clubs/galatasaray_48x48.png" alt="">
-                            <div class="team">Galatasaray</div>
-                        </div>
-                        <div class="score">
-                            5
-                            <svg class="winner" aria-label="Winner" height="8" role="img" width="6"><polygon fill="#262626" points="6,0 6,8 0,4"></polygon></svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="datetime">
-                    <div>19/08 Cuma</div>
-                    <div>21:00</div>
-                </div>
-            </div>
-            <div class="match">
-                <div class="clubs">
-                    <div class="club">
-                        <div class="home">
-                            <img src="assets/images/clubs/shield.png" alt="">
-                            <div class="team">Ümraniyespor</div>
-                        </div>
-                        <div class="score">0</div>
-                    </div>
-                    <div class="club">
-                        <div class="away">
-                            <img src="assets/images/clubs/galatasaray_48x48.png" alt="">
-                            <div class="team">Galatasaray</div>
-                        </div>
-                        <div class="score">
-                            5
-                            <svg class="winner" aria-label="Winner" height="8" role="img" width="6"><polygon fill="#262626" points="6,0 6,8 0,4"></polygon></svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="datetime">
-                    <div>19/08 Cuma</div>
-                    <div>21:00</div>
-                </div>
-            </div>
-            <div class="match">
-                <div class="clubs">
-                    <div class="club">
-                        <div class="home">
-                            <img src="assets/images/clubs/shield.png" alt="">
-                            <div class="team">Ümraniyespor</div>
-                        </div>
-                        <div class="score">0</div>
-                    </div>
-                    <div class="club">
-                        <div class="away">
-                            <img src="assets/images/clubs/galatasaray_48x48.png" alt="">
-                            <div class="team">Galatasaray</div>
-                        </div>
-                        <div class="score">
-                            5
-                            <svg class="winner" aria-label="Winner" height="8" role="img" width="6"><polygon fill="#262626" points="6,0 6,8 0,4"></polygon></svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="datetime">
-                    <div>19/08 Cuma</div>
-                    <div>21:00</div>
-                </div>
-            </div>
-            <div class="match">
-                <div class="clubs">
-                    <div class="club">
-                        <div class="home">
-                            <img src="assets/images/clubs/shield.png" alt="">
-                            <div class="team">Ümraniyespor</div>
-                        </div>
-                        <div class="score">0</div>
-                    </div>
-                    <div class="club">
-                        <div class="away">
-                            <img src="assets/images/clubs/galatasaray_48x48.png" alt="">
-                            <div class="team">Galatasaray</div>
-                        </div>
-                        <div class="score">
-                            5
-                            <svg class="winner" aria-label="Winner" height="8" role="img" width="6"><polygon fill="#262626" points="6,0 6,8 0,4"></polygon></svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="datetime">
-                    <div>19/08 Cuma</div>
-                    <div>21:00</div>
-                </div>
-            </div>
+            <?php endforeach;?>
         </div>
     </div>
-
-
 </section>

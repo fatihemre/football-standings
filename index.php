@@ -1,4 +1,6 @@
 <?php
+require_once 'database.php';
+
 $page = $_GET['page'] ?? 'matches';
 
 ?>
