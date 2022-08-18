@@ -1,3 +1,6 @@
+<?php
+$standings = $db->query("SELECT * FROM standings")->fetchAll(\PDO::FETCH_OBJ);
+?>
 <header>
     <h5>Puan Durumu</h5>
 </header>
@@ -16,26 +19,36 @@
             <th class="col">A</th>
             <th class="col">P</th>
             <th width="90">Son 5</th>
+        </tr>
+        </thead>
         <tbody>
+        <?php foreach($standings as $index=>$team): ?>
         <tr>
             <td>
                 <div class="ucl"></div>
             </td>
             <td>
                 <div class="team">
-                    <span>1</span>
-                    <img src="assets/images/clubs/galatasaray_48x48.png" alt="Galatasaray Takımı Logosu">
-                    <span>Galatasaray</span>
+                    <span><?php echo $index+1; ?></span>
+                    <?php
+                        $arma = file_exists(__DIR__.'/assets/images/clubs/'. strtolower($team->short_code) .'.png') ?
+                        'assets/images/clubs/'. strtolower($team->short_code) .'.png' :
+                        'assets/images/clubs/shield.png';
+                    ?>
+
+                    <img src="<?php echo $arma; ?>" alt="<?php echo $team->display_name;?> Arması">
+
+                    <span><?php echo $team->display_name; ?></span>
                 </div>
             </td>
-            <td class="col">2</td>
-            <td class="col">2</td>
-            <td class="col">0</td>
-            <td class="col">0</td>
-            <td class="col">6</td>
-            <td class="col">2</td>
-            <td class="col">4</td>
-            <td class="col">6</td>
+            <td class="col"><?php echo $team->played;?></td>
+            <td class="col"><?php echo $team->win;?></td>
+            <td class="col"><?php echo $team->draw;?></td>
+            <td class="col"><?php echo $team->lose;?></td>
+            <td class="col"><?php echo $team->goal_scored;?></td>
+            <td class="col"><?php echo $team->goal_conceded;?></td>
+            <td class="col"><?php echo $team->goal_difference;?></td>
+            <td class="col"><?php echo $team->points;?></td>
             <td>
                 <div class="results">
                     <div class="result"><img src="assets/images/winner.svg" alt="Galibiyet"></div>
@@ -46,181 +59,9 @@
                 </div>
             </td>
         </tr>
-        <tr>
-            <td>
-                <div class="uel"></div>
-            </td>
-            <td>
-                <div class="team">
-                    <span>1</span>
-                    <img src="assets/images/clubs/galatasaray_48x48.png" alt="Galatasaray Takımı Logosu">
-                    <span>Galatasaray</span>
-                </div>
-            </td>
-            <td class="col">2</td>
-            <td class="col">2</td>
-            <td class="col">0</td>
-            <td class="col">0</td>
-            <td class="col">6</td>
-            <td class="col">2</td>
-            <td class="col">4</td>
-            <td class="col">6</td>
-            <td>
-                <div class="results">
-                    <div class="result"><img src="assets/images/winner.svg" alt="Galibiyet"></div>
-                    <div class="result"><img src="assets/images/draw.svg" alt="Beraberlik"></div>
-                    <div class="result"><img src="assets/images/loser.svg" alt="Mağlubiyet"></div>
-                    <div class="result"><img src="assets/images/none.svg" alt="Oynanmadı"></div>
-                    <div class="result"><img src="assets/images/none.svg" alt="Oynanmadı"></div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="uel"></div>
-            </td>
-            <td>
-                <div class="team">
-                    <span>1</span>
-                    <img src="assets/images/clubs/galatasaray_48x48.png" alt="Galatasaray Takımı Logosu">
-                    <span>Galatasaray</span>
-                </div>
-            </td>
-            <td class="col">2</td>
-            <td class="col">2</td>
-            <td class="col">0</td>
-            <td class="col">0</td>
-            <td class="col">6</td>
-            <td class="col">2</td>
-            <td class="col">4</td>
-            <td class="col">6</td>
-            <td>
-                <div class="results">
-                    <div class="result"><img src="assets/images/winner.svg" alt="Galibiyet"></div>
-                    <div class="result"><img src="assets/images/draw.svg" alt="Beraberlik"></div>
-                    <div class="result"><img src="assets/images/loser.svg" alt="Mağlubiyet"></div>
-                    <div class="result"><img src="assets/images/none.svg" alt="Oynanmadı"></div>
-                    <div class="result"><img src="assets/images/none.svg" alt="Oynanmadı"></div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="goodbye"></div>
-            </td>
-            <td>
-                <div class="team">
-                    <span>1</span>
-                    <img src="assets/images/clubs/galatasaray_48x48.png" alt="Galatasaray Takımı Logosu">
-                    <span>Galatasaray</span>
-                </div>
-            </td>
-            <td class="col">2</td>
-            <td class="col">2</td>
-            <td class="col">0</td>
-            <td class="col">0</td>
-            <td class="col">6</td>
-            <td class="col">2</td>
-            <td class="col">4</td>
-            <td class="col">6</td>
-            <td>
-                <div class="results">
-                    <div class="result"><img src="assets/images/winner.svg" alt="Galibiyet"></div>
-                    <div class="result"><img src="assets/images/draw.svg" alt="Beraberlik"></div>
-                    <div class="result"><img src="assets/images/loser.svg" alt="Mağlubiyet"></div>
-                    <div class="result"><img src="assets/images/none.svg" alt="Oynanmadı"></div>
-                    <div class="result"><img src="assets/images/none.svg" alt="Oynanmadı"></div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="goodbye"></div>
-            </td>
-            <td>
-                <div class="team">
-                    <span>1</span>
-                    <img src="assets/images/clubs/galatasaray_48x48.png" alt="Galatasaray Takımı Logosu">
-                    <span>Galatasaray</span>
-                </div>
-            </td>
-            <td class="col">2</td>
-            <td class="col">2</td>
-            <td class="col">0</td>
-            <td class="col">0</td>
-            <td class="col">6</td>
-            <td class="col">2</td>
-            <td class="col">4</td>
-            <td class="col">6</td>
-            <td>
-                <div class="results">
-                    <div class="result"><img src="assets/images/winner.svg" alt="Galibiyet"></div>
-                    <div class="result"><img src="assets/images/draw.svg" alt="Beraberlik"></div>
-                    <div class="result"><img src="assets/images/loser.svg" alt="Mağlubiyet"></div>
-                    <div class="result"><img src="assets/images/none.svg" alt="Oynanmadı"></div>
-                    <div class="result"><img src="assets/images/none.svg" alt="Oynanmadı"></div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="goodbye"></div>
-            </td>
-            <td>
-                <div class="team">
-                    <span>1</span>
-                    <img src="assets/images/clubs/galatasaray_48x48.png" alt="Galatasaray Takımı Logosu">
-                    <span>Galatasaray</span>
-                </div>
-            </td>
-            <td class="col">2</td>
-            <td class="col">2</td>
-            <td class="col">0</td>
-            <td class="col">0</td>
-            <td class="col">6</td>
-            <td class="col">2</td>
-            <td class="col">4</td>
-            <td class="col">6</td>
-            <td>
-                <div class="results">
-                    <div class="result"><img src="assets/images/winner.svg" alt="Galibiyet"></div>
-                    <div class="result"><img src="assets/images/draw.svg" alt="Beraberlik"></div>
-                    <div class="result"><img src="assets/images/loser.svg" alt="Mağlubiyet"></div>
-                    <div class="result"><img src="assets/images/none.svg" alt="Oynanmadı"></div>
-                    <div class="result"><img src="assets/images/none.svg" alt="Oynanmadı"></div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="goodbye"></div>
-            </td>
-            <td>
-                <div class="team">
-                    <span>1</span>
-                    <img src="assets/images/clubs/galatasaray_48x48.png" alt="Galatasaray Takımı Logosu">
-                    <span>Galatasaray</span>
-                </div>
-            </td>
-            <td class="col">2</td>
-            <td class="col">2</td>
-            <td class="col">0</td>
-            <td class="col">0</td>
-            <td class="col">6</td>
-            <td class="col">2</td>
-            <td class="col">4</td>
-            <td class="col">6</td>
-            <td>
-                <div class="results">
-                    <div class="result"><img src="assets/images/winner.svg" alt="Galibiyet"></div>
-                    <div class="result"><img src="assets/images/draw.svg" alt="Beraberlik"></div>
-                    <div class="result"><img src="assets/images/loser.svg" alt="Mağlubiyet"></div>
-                    <div class="result"><img src="assets/images/none.svg" alt="Oynanmadı"></div>
-                    <div class="result"><img src="assets/images/none.svg" alt="Oynanmadı"></div>
-                </div>
-            </td>
-        </tr>
+        <?php endforeach; ?>
+
 
         </tbody>
-        </tr></thead></table>
+        </table>
 </section>
