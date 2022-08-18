@@ -58,3 +58,74 @@ body{
     background:rgba(255,255,255,1);
     border-radius: .5rem;
 }
+
+header h5{
+    font-size:1.25rem;
+    font-weight:800;
+    line-height:1.75rem;
+    margin:0 0 1rem;
+    text-align: center;
+}
+.fixture{
+    display:flex;
+    flex-direction: column;
+}
+.week{
+    color:rgba(255,255,255,1);
+    background:rgba(23,23,23,1);
+    padding:.75rem 1.5rem;
+    margin-bottom:1px;
+}
+.matches{
+    display:grid;
+    gap:1px;
+    grid: '1 1';
+}
+.match{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:10px;
+    grid-auto-rows: minmax(65px, auto);
+    background:rgba(245,245,245,1);
+    padding:1.5rem 2rem;
+}
+.clubs{
+    grid-column: 1 / 3;
+    grid-row: 1;
+}
+.club{
+    display: flex;
+    justify-content: space-between;
+    font-size:1rem;
+}
+.club:first-child{
+    margin-bottom:1rem;
+}
+.score{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.winner{
+    position: absolute;
+    right:-10px;
+}
+.home, .away, .team{
+    display: flex;
+    align-items: center;
+}
+.home img, .away img, .team img{
+    max-width: 24px;
+    margin-right:1rem;
+}
+
+
+.datetime{
+    grid-column: 3;
+    grid-row: 1;
+    border-left: 1px solid rgba(215,215,215, 1);
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
