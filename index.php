@@ -1,3 +1,7 @@
+<?php
+$page = $_GET['page'] ?? 'matches';
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -18,19 +22,19 @@
         </header>
         <div class="content">
             <nav class="sidebar">
-                <a class="active nav-item" href="#">
+                <a class="<?php echo $page === 'matches' ? 'active' : '';?> nav-item" href="index.php">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                     Anasayfa
                 </a>
-                <a class="nav-item" href="#">
+                <a class="<?php echo $page === 'fixture' ? 'active' : '';?> nav-item" href="index.php?page=fixture">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
-                    Maçlar
+                    Fikstür
                 </a>
-                <a class="nav-item" href="#">
+                <a class="<?php echo $page === 'standings' ? 'active' : '';?> nav-item" href="index.php?page=standings">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
@@ -38,7 +42,15 @@
                 </a>
             </nav>
             <div class="page-content">
-                ...
+                <?php
+                $file = __DIR__.'/_'.$page.'.php';
+                if(file_exists($file)) {
+                    require $file;
+                } else {
+                    require '404.php';
+                }
+
+                ?>
             </div>
         </div>
     </div>
