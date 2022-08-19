@@ -1,0 +1,69 @@
+{% extends 'base.twig' %}
+{% block pageTitle %}Puan Durumu{% endblock %}
+{% block content %}
+
+    <table class="standings">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Takım</th>
+            <th class="col">OM</th>
+            <th class="col">G</th>
+            <th class="col">B</th>
+            <th class="col">M</th>
+            <th class="col">AG</th>
+            <th class="col">YG</th>
+            <th class="col">A</th>
+            <th class="col">P</th>
+            <th width="90">Son 5</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for index, team in table %}
+            {% set mod = (index+1) % table|length %}
+        <tr>
+            <td>
+                {% if mod == 1 %} <div class="ucl"></div> {% endif %}
+                {% if mod == 2 %} <div class="uel"></div> {% endif %}
+                {% if mod == 3 %} <div class="uel"></div> {% endif %}
+                {% if mod == 16 %} <div class="goodbye"></div> {% endif %}
+                {% if mod == 17 %} <div class="goodbye"></div> {% endif %}
+                {% if mod == 18 %} <div class="goodbye"></div> {% endif %}
+                {% if mod == 0 %} <div class="goodbye"></div> {% endif %}
+
+            </td>
+            <td>
+                <div class="team">
+                    <span>{{ index+1 }}</span>
+                    {% set default_crest = 'assets/images/clubs/shield.png' %}
+                    {% set team_crest = 'assets/images/clubs/' ~ team.short_code|lower ~'.png' %}
+
+                    <img src="{{ ondisk(team_crest) ? team_crest : default_crest }}" alt="{{ team.display_name }} Arması">
+                    <span>{{ team.display_name }}</span>
+                </div>
+            </td>
+            <td class="col">{{ team.played }}</td>
+            <td class="col">{{ team.win }}</td>
+            <td class="col">{{ team.draw }}</td>
+            <td class="col">{{ team.lose }}</td>
+            <td class="col">{{ team.goal_scored }}</td>
+            <td class="col">{{ team.goal_conceded }}</td>
+            <td class="col">{{ team.goal_difference }}</td>
+            <td class="col">{{ team.points }}</td>
+            <td>
+                <div class="results">
+                    <div class="result"><img src="assets/images/winner.svg" alt="Galibiyet"></div>
+                    <div class="result"><img src="assets/images/draw.svg" alt="Beraberlik"></div>
+                    <div class="result"><img src="assets/images/loser.svg" alt="Mağlubiyet"></div>
+                    <div class="result"><img src="assets/images/none.svg" alt="Oynanmadı"></div>
+                    <div class="result"><img src="assets/images/none.svg" alt="Oynanmadı"></div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+
+{% endblock %}

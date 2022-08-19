@@ -1,0 +1,57 @@
+{% extends 'base.twig' %}
+{% block pageTitle %}Fikstür{% endblock %}
+{% block content %}
+    {% for week, matches in all %}
+    <div class="fixture">
+        <div class="week">
+            {{ week }}
+        </div>
+        <div class="matches">
+            {% set today = 'now'|date('Y-m-d H:i:s') %}
+            {% for match in matches %}
+                {% set is_played = (match.match_day|date('Y-m-d H:i:s')) < today %}
+                <div class="match">
+                    <div class="clubs">
+                        <div class="club">
+                            <div class="home">
+                                {% set default_crest = 'assets/images/clubs/shield.png' %}
+                                {% set home_crest = 'assets/images/clubs/' ~ match.home_team_short_code|lower ~'.png' %}
+
+                                <img src="{{ ondisk(home_crest) ? home_crest : default_crest }}" alt="{{ match.home_team_name }} Arması">
+
+                                <div class="team">
+                                    {{ match.home_team_name }}
+                                </div>
+                            </div>
+                            <div class="score">
+                                {{ is_played ? match.home_team_score : '-' }}
+                                {% if match.home_team_score > match.away_team_score %}
+                                    <svg class="winner" aria-label="Winner" height="8" role="img" width="6"><polygon fill="#262626" points="6,0 6,8 0,4"></polygon></svg>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="club">
+                            <div class="away">
+                                {% set away_crest = 'assets/images/clubs/' ~ match.away_team_short_code|lower ~'.png' %}
+                                <img src="{{ ondisk(away_crest) ? away_crest : default_crest }}" alt="{{ match.away_team_name}} Arması">
+                                <div class="team">{{ match.away_team_name }}</div>
+                            </div>
+                            <div class="score">
+                                {{ is_played ? match.away_team_score : '-' }}
+                                {% if match.away_team_score > match.home_team_score %}
+                                    <svg class="winner" aria-label="Winner" height="8" role="img" width="6"><polygon fill="#262626" points="6,0 6,8 0,4"></polygon></svg>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="datetime">
+                        <div>{{ match.match_day|date('d/M D') }}</div>
+                        <div>{{ match.match_day|date('H:i') }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}

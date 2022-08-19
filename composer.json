@@ -1,0 +1,12 @@
+{
+    "name": "fatihemre/football-standings",
+    "require": {
+        "izniburak/router": "^2.5",
+        "twig/twig": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Standings\\": "app"
+        }
+    }
+}
