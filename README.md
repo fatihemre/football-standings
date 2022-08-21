@@ -13,7 +13,7 @@ Herhangi başka bir lig de entegre edilebilir.
 * [GELECEK] Verileri elle girebileceğiniz bir yönetim paneline sahip olabilirsiniz.
 
 ## Sistem Gereksinimleri
-* PHP 8.0 veya üstü
+* PHP 8.0.2 veya üstü
 * HTTP Server (Nginx tercih edilir.)
 * MySQL
 * Composer
@@ -21,14 +21,13 @@ Herhangi başka bir lig de entegre edilebilir.
 ## Kurulum
 * Repo'yu klonlayın (`git clone https://github.com/fatihemre/football-standings`)
 * Bağımlılıkları kurun. (`composer install --no-dev -o`)
-* [GELECEK] Environment dosyasını oluşturun ve özelleştirin (`mv .env.example .env`)
+* Environment dosyasını oluşturun ve özelleştirin (`mv .env.example .env`)
 * scheme klasöründeki mysql dump dosyalarını veritabanınıza import edin.
 * [GELECEK] Yönetim panelini kullanarak verilerinizi ekleyin.
 * Eğer localhostta kullanıyorsanız built-in server komutunu kullanarak uygulamayı çalıştırabilirsiniz. `sudo php -S localhost:80 -t $(pwd)/public server.php`
 
 
 ## TODO
-- [ ] Tüm ayarlar config dosyasına taşınacak.
 - [ ] Birden fazla lig eklenebilmesi ve switch edilebilmesi sağlanacak.
 - [ ] Sezonların switch edilebilmesi sağlanacak.
 - [ ] ORM ve Migration oluşturulacak.
