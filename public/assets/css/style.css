@@ -148,7 +148,7 @@ header h5{
 }
 .standings tr:last-child td,
 .standings tr td:first-child{
-    border-color:transparent;
+    border-color:rgba(245,245,245,1);
 }
 .standings .col {
     text-align: center;
