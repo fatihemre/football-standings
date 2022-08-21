@@ -3,7 +3,7 @@ Uygulama Türkiye Süper Liginin maçlarını ve puan durumunu örnek alarak tas
 Herhangi başka bir lig de entegre edilebilir.
 
 ## Ekran Görüntüsü
-![Screenshot](Ekran görüntüsü linki)
+![Screenshot](https://raw.githubusercontent.com/fatihemre/football-standings/master/screenshot.png)
 
 ## Özellikler
 * Belirlediğiniz bir futbol liginin verilerini girdiğiniz zaman fikstür ve puan durumu oluşturur.
