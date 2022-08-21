@@ -4,7 +4,7 @@
 -- https://tableplus.com/
 --
 -- Database: football
--- Generation Time: 2022-08-18 21:58:04.4730
+-- Generation Time: 2022-08-21 18:46:10.0710
 -- -------------------------------------------------------------
 
 
@@ -18,33 +18,8 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
-CREATE TABLE `teams` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `short_code` varchar(3) DEFAULT NULL,
-  `display_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `last_five_states` AS select `fixture_view`.`id` AS `id`,`fixture_view`.`home_team_id` AS `home_team_id`,`fixture_view`.`away_team_id` AS `away_team_id`,`fixture_view`.`home_team_score` AS `home_team_score`,`fixture_view`.`away_team_score` AS `away_team_score`,(case when (`fixture_view`.`home_team_score` > `fixture_view`.`away_team_score`) then 'home_win' when (`fixture_view`.`away_team_score` > `fixture_view`.`home_team_score`) then 'away_win' else 'draw' end) AS `state` from `fixture_view` where (`fixture_view`.`match_day` < now()) order by `fixture_view`.`match_day` desc;
 
-INSERT INTO `teams` (`id`, `short_code`, `display_name`) VALUES
-(1, 'ADS', 'Adana Demirspor'),
-(2, 'ALN', 'Alanyaspor'),
-(3, 'AKG', 'Ankaragücü'),
-(4, 'ANT', 'Antalyaspor'),
-(5, 'BSK', 'Başakşehir'),
-(6, 'BJK', 'Beşiktaş'),
-(7, 'FB', 'Fenerbahçe'),
-(8, 'GS', 'Galatasaray'),
-(9, 'GFK', 'Gaziantep FK'),
-(10, 'GRS', 'Giresunspor'),
-(11, 'HTY', 'Hatayspor'),
-(12, 'IST', 'İstanbulspor'),
-(13, 'KGR', 'Karagümrük'),
-(14, 'KSP', 'Kasımpaşa'),
-(15, 'KS', 'Kayserispor'),
-(16, 'KON', 'Konyaspor'),
-(17, 'SVS', 'Sivasspor'),
-(18, 'TS', 'Trabzonspor'),
-(19, 'ÜMR', 'Ümraniyespor');
 
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
