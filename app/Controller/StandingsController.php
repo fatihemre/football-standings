@@ -15,8 +15,6 @@ class StandingsController extends Controller
             $table[$index]->last_five = (new LastFiveStates)->latest($t->team_id);
         }
 
-        // $this->debug($table);
-
         return $this->view('index', ['table'=>$table]);
     }
 }
