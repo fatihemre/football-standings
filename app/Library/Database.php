@@ -14,7 +14,7 @@ trait Database
     private function connect(): void
     {
         try {
-            $this->connection = new \PDO('mysql:host=127.0.0.1;dbname=football;charset=utf8;port=3307', 'root', '');
+            $this->connection = new \PDO(config('DB_CONNECTION') . ':host='.config('DB_HOST').';dbname='.config('DB_DATABASE').';charset='.config('DB_CHARSET').';port=' . config('DB_PORT'), config('DB_USERNAME'), config('DB_PASSWORD'));
             $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
         } catch (\PDOException $e) {

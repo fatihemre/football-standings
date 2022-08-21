@@ -3,6 +3,7 @@ date_default_timezone_set('Europe/Istanbul');
 define("APP_PATH", realpath(__DIR__.'/..'));
 
 require_once APP_PATH . '/vendor/autoload.php';
+
 try {
 
     $router = new \Buki\Router\Router([

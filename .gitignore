@@ -3,3 +3,4 @@ TODO.md
 storage
 vendor
 .DS_Store
+.env
