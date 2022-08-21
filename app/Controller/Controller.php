@@ -31,4 +31,19 @@ class Controller extends \Buki\Router\Http\Controller
         return $this->view->render($classPath . '/' . $path . '.twig', $args);
     }
 
+    public function debug($args, $exit=true, $preFormatted=true)
+    {
+        if($preFormatted)
+            echo '<pre>';
+        if(is_bool($args) || is_null($args)) {
+            var_dump($args);
+        } else {
+            print_r($args);
+        }
+        if($preFormatted)
+            echo '</pre>';
+        if($exit)
+            exit;
+    }
+
 }
