@@ -4,6 +4,7 @@ namespace Standings\Model;
 
 class StandingsEntity
 {
+    public int $team_id;
     public string $display_name;
     public string $short_code;
     public int $win;
@@ -14,4 +15,5 @@ class StandingsEntity
     public int $goal_conceded;
     public int $goal_difference;
     public int $points;
+    public array $last_five;
 }

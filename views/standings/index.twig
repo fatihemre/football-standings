@@ -52,11 +52,25 @@
             <td class="col">{{ team.points }}</td>
             <td>
                 <div class="results">
-                    <div class="result"><img src="assets/images/winner.svg" alt="Galibiyet"></div>
-                    <div class="result"><img src="assets/images/draw.svg" alt="Beraberlik"></div>
-                    <div class="result"><img src="assets/images/loser.svg" alt="Mağlubiyet"></div>
-                    <div class="result"><img src="assets/images/none.svg" alt="Oynanmadı"></div>
-                    <div class="result"><img src="assets/images/none.svg" alt="Oynanmadı"></div>
+                    {% for latest in 0..4 %}
+                        <div class="result">
+                            {% if team.last_five[latest] is defined %}
+                                {% if
+                                    (team.last_five[latest].state == 'home_win' and team.last_five[latest].home_team_id == team.team_id) or
+                                    (team.last_five[latest].state == 'away_win' and team.last_five[latest].away_team_id == team.team_id)
+                                %}
+                                    <img src="assets/images/winner.svg" alt="Galibiyet">
+                                {% elseif team.last_five[latest].state == 'draw' %}
+                                    <img src="assets/images/draw.svg" alt="Beraberlik">
+                                {% else %}
+                                    <img src="assets/images/loser.svg" alt="Mağlubiyet">
+                                {% endif %}
+                            {% else %}
+                                <img src="assets/images/none.svg" alt="Oynanmadı">
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
                 </div>
             </td>
         </tr>
