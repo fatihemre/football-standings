@@ -26,6 +26,9 @@ try {
 
         $router->get('', [\Standings\Controller\AdminController::class, 'index'], ['before'=>\Standings\Middleware\AdminMiddleware::class]);
         $router->get('/teams', [\Standings\Controller\AdminController::class, 'teams'], ['before'=>\Standings\Middleware\AdminMiddleware::class]);
+        $router->get('/seasons', [\Standings\Controller\AdminController::class, 'seasons'], ['before'=>\Standings\Middleware\AdminMiddleware::class]);
+        $router->get('/leauges', [\Standings\Controller\AdminController::class, 'leauges'], ['before'=>\Standings\Middleware\AdminMiddleware::class]);
+        $router->get('/matches', [\Standings\Controller\AdminController::class, 'matches'], ['before'=>\Standings\Middleware\AdminMiddleware::class]);
 
 
         $router->get('/logout', [\Standings\Controller\AuthController::class, 'logout'], ['before'=>\Standings\Middleware\AdminMiddleware::class]);

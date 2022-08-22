@@ -55,6 +55,9 @@
                 <header>
                     <h5>{% block pageTitle %}{% endblock%}</h5>
                 </header>
+                {% if className == 'admin' %}
+                    {% include 'partials/admin-menu.twig' %}
+                {% endif %}
                 {% block content %}{% endblock %}
             </div>
         </div>
