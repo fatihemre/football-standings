@@ -2,6 +2,8 @@
 
 namespace Standings\Controller;
 
+use Symfony\Component\HttpFoundation\Session\Session;
+
 class Controller extends \Buki\Router\Http\Controller
 {
     private $view;
@@ -27,9 +29,13 @@ class Controller extends \Buki\Router\Http\Controller
         $classPath = str_replace('controller', '', $className);
 
         $args['className'] = $classPath;
+        $args['user'] = session('user');
+
+        $args['flash'] = (new Session())->getFlashBag()->all();
 
         return $this->view->render($classPath . '/' . $path . '.twig', $args);
     }
+
 
     public function debug($args, $exit=true, $preFormatted=true)
     {

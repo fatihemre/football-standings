@@ -180,3 +180,92 @@ header h5{
 .ranking{
     width:1.25rem;
 }
+
+/**
+Alert
+ */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+.alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+.alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+
+/**
+Login Page
+ */
+.login{
+    max-width:480px;
+    margin:3rem auto;
+    background:rgba(243, 243, 243, 1);
+    padding:1rem;
+    border-radius: 4px;
+}
+.login .title{
+    text-align:center;
+    margin:1rem 0;
+}
+.input-row{
+    display:flex;
+    justify-content: center;
+    margin-bottom:1rem;
+    align-items: center;
+}
+.input-row label {
+    text-align:right;
+    min-width:30%;
+    margin-right: 1rem;
+}
+.input-row input {
+    border:1px solid rgba(215,215,215,1);
+    padding:.375rem .75rem
+}
+.input-row button {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid #2e6da4;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #fff;
+    background-color: #337ab7;
+}
+.input-row button:hover {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+    text-decoration: none;
+}

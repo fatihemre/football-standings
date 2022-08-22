@@ -1,4 +1,5 @@
 <?php
+
 date_default_timezone_set('Europe/Istanbul');
 define("APP_PATH", realpath(__DIR__.'/..'));
 
@@ -20,9 +21,23 @@ try {
     $router->get('/', [\Standings\Controller\HomeController::class, 'index']);
     $router->get('/fixture', [\Standings\Controller\FixtureController::class, 'index']);
     $router->get('/standings', [\Standings\Controller\StandingsController::class, 'index']);
+
+    $router->group('manage', function($router){
+
+        $router->get('', [\Standings\Controller\AdminController::class, 'index'], ['before'=>\Standings\Middleware\AdminMiddleware::class]);
+        $router->get('/teams', [\Standings\Controller\AdminController::class, 'teams'], ['before'=>\Standings\Middleware\AdminMiddleware::class]);
+
+
+        $router->get('/logout', [\Standings\Controller\AuthController::class, 'logout'], ['before'=>\Standings\Middleware\AdminMiddleware::class]);
+        $router->get('/login', [\Standings\Controller\AuthController::class, 'login']);
+        $router->post('/login', [\Standings\Controller\AuthController::class, 'check']);
+    });
+
     $router->run();
 
 } catch (\Throwable $t) {
-    die($t->getMessage());
+    echo '<pre>';
+    print_r($t);
+    exit;
 }
 
