@@ -28,6 +28,7 @@ Herhangi başka bir lig de entegre edilebilir.
 
 
 ## TODO
+- [ ] Swal entegre edilecek ve yönetim panelindeki formların swal içerisinde çalışması sağlanacak.
 - [ ] Birden fazla lig eklenebilmesi ve switch edilebilmesi sağlanacak.
 - [ ] Sezonların switch edilebilmesi sağlanacak.
 - [ ] ORM ve Migration oluşturulacak.
