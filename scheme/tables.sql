@@ -17,6 +17,12 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+CREATE TABLE `leauges` (
+   `id` int NOT NULL AUTO_INCREMENT,
+   `display_name` varchar(255) DEFAULT NULL,
+   `status` int NOT NULL DEFAULT '0',
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `fixtures` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -57,6 +63,13 @@ CREATE TABLE `teams` (
   `display_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+
+INSERT INTO `leauges` (`id`, `display_name`, `status`) VALUES
+(1, 'Türkiye - Süper Lig', 1),
+(2, 'İngiltere - Premier Lig', 0),
+(3, 'İtalya - Serie A', 0),
+(4, 'Almanya - Bundesliga', 0),
+(5, 'İspanya - La Liga', 0);
 
 INSERT INTO `fixtures` (`id`, `display_name`) VALUES
 (1, '2022-2023');

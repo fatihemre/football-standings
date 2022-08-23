@@ -2,6 +2,7 @@
 
 namespace Standings\Controller;
 
+use Standings\Model\Leauge;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -27,6 +28,8 @@ class AdminController extends Controller
     }
     public function leauges()
     {
-        return $this->view('leauges', ['page'=>'leauges']);
+        $leauges = (new Leauge())->getLeauges();
+
+        return $this->view('leauges', ['page'=>'leauges', 'leauges'=>$leauges, 'leauge_statuses' => Leauge::$statusMap]);
     }
 }
