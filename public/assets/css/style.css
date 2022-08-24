@@ -194,31 +194,41 @@ Alert
 /**
 Login Page
  */
-.login{
-    max-width:480px;
-    margin:3rem auto;
+.form-container{
+    max-width:50%;
     background:rgba(243, 243, 243, 1);
     padding:1rem;
     border-radius: 4px;
 }
-.login .title{
+.form-container .title{
     text-align:center;
     margin:1rem 0;
 }
+.login{
+    max-width:480px;
+    margin:3rem auto;
+}
 .input-row{
     display:flex;
-    justify-content: center;
+    justify-content: flex-start;
     margin-bottom:1rem;
     align-items: center;
+}
+.input-row.right{
+    justify-content: flex-end;
+}
+.input-row.center{
+    justify-content: center;
 }
 .input-row label {
     text-align:right;
     min-width:30%;
     margin-right: 1rem;
 }
-.input-row input {
+.input-row input, .input-row select {
+    padding:.375rem;
     border:1px solid rgba(215,215,215,1);
-    padding:.375rem .75rem
+
 }
 .input-row button {
     display: inline-block;

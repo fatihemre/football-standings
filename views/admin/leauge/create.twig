@@ -1,0 +1,29 @@
+{% extends 'base.twig' %}
+{% block title %}Lig Oluştur{% endblock %}
+{% block content %}
+
+    <div class="form-container">
+        <h3 class="title">Yeni Lig Oluştur</h3>
+        <form action="/manage/leauges/create" method="post">
+
+            <div class="input-row">
+                <label for="display_name">Lig Adı:</label>
+                <input type="text" id="display_name" name="display_name">
+            </div>
+            <div class="input-row">
+                <label for="status">Durum:</label>
+                <select name="status" id="status">
+                    <option value="0">Pasif</option>
+                    <option value="1">Aktif</option>
+                </select>
+            </div>
+            <div class="input-row">
+                <label></label>
+                <button type="submit">Kaydet</button>
+            </div>
+        </form>
+
+    </div>
+
+
+{% endblock %}

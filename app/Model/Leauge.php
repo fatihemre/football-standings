@@ -47,4 +47,15 @@ class Leauge
 
     }
 
+    public function insert(LeaugeEntity $entity): int|false
+    {
+        $sth = $this->connection->prepare("INSERT INTO leauges(display_name, status) VALUES (:display_name, :status)");
+        $sth->execute([
+            'display_name' => $entity->display_name,
+            'status' => $entity->status
+        ]);
+
+        return $this->connection->lastInsertId();
+    }
+
 }

@@ -2,13 +2,14 @@
 
 namespace Standings\Controller;
 
+use Buki\Router\Router;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class Controller extends \Buki\Router\Http\Controller
 {
-    private $view;
+    protected $view;
     public function __construct()
     {
         $loader = new \Twig\Loader\FilesystemLoader(APP_PATH.'/views/');
@@ -31,13 +32,17 @@ class Controller extends \Buki\Router\Http\Controller
 
         $args['flash'] = (new Session())->getFlashBag()->all();
 
-        return $this->view->render($this->className() . '/' . $path . '.twig', $args);
+        $fullPath = $this->className() . DIRECTORY_SEPARATOR . $path . '.twig';
+
+        return $this->view->render($fullPath, $args);
     }
 
     public function className(): string
     {
-        $className = strtolower((new \ReflectionClass(get_called_class()))->getShortName());
-        return str_replace('controller', '', $className);
+        $className = (new \ReflectionClass(get_called_class()))->getName();
+        $className = str_replace(['Standings\\Controller\\', 'Controller'], '', $className);
+
+        return strtolower(str_replace('\\', DIRECTORY_SEPARATOR, $className));
     }
 
 

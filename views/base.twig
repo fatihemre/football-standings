@@ -55,7 +55,14 @@
                 <header>
                     <h5>{% block pageTitle %}{% endblock%}</h5>
                 </header>
-                {% if className == 'admin' %}
+
+                {% for type, messages in flash %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ type }}">{{ message }}</div>
+                    {% endfor %}
+                {% endfor %}
+
+                {% if 'admin' in className %}
                     {% include 'partials/admin-menu.twig' %}
                 {% endif %}
                 {% block content %}{% endblock %}

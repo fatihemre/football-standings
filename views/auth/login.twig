@@ -1,26 +1,21 @@
 {% extends 'base.twig' %}
 {% block pageTitle %}Yönetici Paneli{% endblock %}
 {% block content %}
-    <div class="login">
+    <div class="form-container login">
         <h3 class="title">Oturum Aç</h3>
         <form action="/manage/login" method="post">
             <div class="input-row">
                 <label for="email">Eposta:</label>
-                <input type="email" id="email" name="email">
+                <input type="email" id="email" name="email" value="email@example.com">
             </div>
             <div class="input-row">
                 <label for="password">Parola:</label>
-                <input type="password" id="password" name="password">
+                <input type="password" id="password" name="password" value="secret">
             </div>
             <div class="input-row">
+                <label></label>
                 <button type="submit">Oturum Aç</button>
             </div>
-
-            {% for type, messages in flash %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ type }}">{{ message }}</div>
-                {% endfor %}
-            {% endfor %}
 
         </form>
     </div>

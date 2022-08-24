@@ -28,6 +28,10 @@ try {
         $router->get('/teams', [\Standings\Controller\AdminController::class, 'teams'], ['before'=>\Standings\Middleware\AdminMiddleware::class]);
         $router->get('/seasons', [\Standings\Controller\AdminController::class, 'seasons'], ['before'=>\Standings\Middleware\AdminMiddleware::class]);
         $router->get('/leauges', [\Standings\Controller\AdminController::class, 'leauges'], ['before'=>\Standings\Middleware\AdminMiddleware::class]);
+
+        $router->get('/leauges/create', [\Standings\Controller\Admin\LeaugeController::class, 'create'], ['before'=>\Standings\Middleware\AdminMiddleware::class]);
+        $router->post('/leauges/create', [\Standings\Controller\Admin\LeaugeController::class, 'store'], ['before'=>\Standings\Middleware\AdminMiddleware::class]);
+
         $router->get('/matches', [\Standings\Controller\AdminController::class, 'matches'], ['before'=>\Standings\Middleware\AdminMiddleware::class]);
 
 
