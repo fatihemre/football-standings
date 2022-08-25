@@ -10,6 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 class LeaugeController extends Controller
 {
 
+    public function index()
+    {
+        $leauges = (new Leauge())->getLeauges();
+        return $this->view('index', ['page'=>'leauges', 'leauges'=>$leauges, 'leauge_statuses' => Leauge::$statusMap]);
+    }
+
     public function create()
     {
         return $this->view('create');

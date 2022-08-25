@@ -29,7 +29,7 @@ class AuthController extends Controller
 
         if(!$user) {
             flash('warning', 'User not found');
-            redirectTo('/manage/login');
+            redirectTo('/auth/login');
         }
 
         session('user', $user);

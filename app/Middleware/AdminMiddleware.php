@@ -11,7 +11,7 @@ class AdminMiddleware extends Middleware
     {
         if(!session('user') || session('user') === '')
         {
-            return redirectTo('/manage/login');
+            return redirectTo('/auth/login');
         }
 
         return true;
