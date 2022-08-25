@@ -1,0 +1,26 @@
+{% extends 'base.twig' %}
+{% block title %}Takım Oluştur{% endblock %}
+{% block content %}
+
+    <div class="form-container">
+        <h3 class="title">Yeni Takım Oluştur</h3>
+        <form action="/manage/teams/create" method="post">
+
+            <div class="input-row">
+                <label for="display_name">Takım Adı:</label>
+                <input type="text" id="display_name" name="display_name">
+            </div>
+            <div class="input-row">
+                <label for="short_code">Kısa Ad:</label>
+                <input type="text" id="short_code" name="short_code" maxlength="3">
+            </div>
+            <div class="input-row">
+                <label></label>
+                <button type="submit">Kaydet</button>
+            </div>
+        </form>
+
+    </div>
+
+
+{% endblock %}

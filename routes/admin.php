@@ -18,7 +18,17 @@ $adminRouter->group('manage', function($adminRouter){
         return redirectTo('/manage/leauges');
     });
 
-    $adminRouter->get('teams', [TeamController::class, 'index']);
+    $adminRouter->group('teams', function($adminRouter) {
+        $adminRouter->get('', [TeamController::class, 'index']);
+
+        $adminRouter->get('create', [TeamController::class, 'create']);
+        $adminRouter->post('create', [TeamController::class, 'store']);
+
+        $adminRouter->get('edit/:id', [TeamController::class, 'edit']);
+        $adminRouter->post('edit/:id', [TeamController::class, 'update']);
+
+        $adminRouter->get('remove/:id', [TeamController::class, 'remove']);
+    });
 
     $adminRouter->group('fixtures', function($adminRouter) {
         $adminRouter->get('', [FixtureController::class, 'index']);

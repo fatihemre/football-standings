@@ -1,0 +1,26 @@
+{% extends 'base.twig' %}
+{% block title %}Takımı Düzenle{% endblock %}
+{% block content %}
+
+    <div class="form-container">
+        <h3 class="title">Takımı Düzenle</h3>
+        <form action="/manage/teams/edit/{{ team.id }}" method="post">
+
+            <div class="input-row">
+                <label for="display_name">Takım Adı:</label>
+                <input type="text" id="display_name" name="display_name" value="{{ team.display_name }}">
+            </div>
+            <div class="input-row">
+                <label for="short_code">Kısa Ad:</label>
+                <input type="text" id="short_code" name="short_code" maxlength="3" value="{{ team.short_code }}">
+            </div>
+            <div class="input-row">
+                <label></label>
+                <button type="submit">Kaydet</button>
+            </div>
+        </form>
+
+    </div>
+
+
+{% endblock %}
