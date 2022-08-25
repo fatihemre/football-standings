@@ -62,29 +62,26 @@ class LeaugeController extends Controller
         try {
             if(!$leauge->update($entity)) {
                 flash('warning', 'Lig güncellenemedi');
-                return redirectTo('/manage/leauges/edit/' . $id);
+            } else {
+                flash('success', 'Lig başarıyla güncellendi');
             }
         } catch (\Exception $e){
             flash('warning', $e->getMessage());
+        } finally {
             return redirectTo('/manage/leauges/edit/' . $id);
         }
-
-        flash('success', 'Lig başarıyla güncellendi');
-        return redirectTo('/manage/leauges/edit/' . $id );
 
     }
 
     public function remove(int $id)
     {
-        // TODO: direkt silmek yerine softdelete işlemi yapılabilir. Ayrı bir yayın konusu??
+        // TODO: Softdelete trait yapılarak, bu trait kullanılan tüm veritabanlarında sadece softdelete çalışması sağlanır.
         try {
             (new Leauge())->remove($id);
-
             flash('success', 'Lig başarıyla silindi');
-            return redirectTo('/manage/leauges');
-
         } catch (\Exception $e) {
             flash('warning', $e->getMessage());
+        } finally {
             return redirectTo('/manage/leauges');
         }
     }
