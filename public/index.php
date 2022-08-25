@@ -1,6 +1,6 @@
 <?php
 
-use Buki\Router\Router;
+use Standings\Library\Router;
 
 date_default_timezone_set('Europe/Istanbul');
 define("APP_PATH", realpath(__DIR__.'/..'));
