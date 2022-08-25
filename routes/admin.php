@@ -5,7 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Standings\Controller\Admin\LeaugeController;
 use Standings\Controller\Admin\MatchController;
-use Standings\Controller\Admin\FixtureController as AdminFixtureController;
+use Standings\Controller\Admin\FixtureController;
 use Standings\Controller\Admin\TeamController;
 
 use Standings\Middleware\AdminMiddleware;
@@ -21,15 +21,15 @@ $adminRouter->group('manage', function($adminRouter){
     $adminRouter->get('teams', [TeamController::class, 'index']);
 
     $adminRouter->group('fixtures', function($adminRouter) {
-        $adminRouter->get('', [AdminFixtureController::class, 'index']);
+        $adminRouter->get('', [FixtureController::class, 'index']);
 
-        $adminRouter->get('create', [AdminFixtureController::class, 'create']);
-        $adminRouter->post('create', [AdminFixtureController::class, 'store']);
+        $adminRouter->get('create', [FixtureController::class, 'create']);
+        $adminRouter->post('create', [FixtureController::class, 'store']);
 
-        $adminRouter->get('edit/:id', [AdminFixtureController::class, 'edit']);
-        $adminRouter->post('edit/:id', [AdminFixtureController::class, 'update']);
+        $adminRouter->get('edit/:id', [FixtureController::class, 'edit']);
+        $adminRouter->post('edit/:id', [FixtureController::class, 'update']);
 
-        $adminRouter->get('remove/:id', [AdminFixtureController::class, 'remove']);
+        $adminRouter->get('remove/:id', [FixtureController::class, 'remove']);
     });
 
     $adminRouter->group('leauges', function($adminRouter) {
