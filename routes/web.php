@@ -1,7 +1,7 @@
 <?php
 
 use Standings\Controller\AuthController;
-use Standings\Controller\FixtureController;
+use Standings\Controller\MatchController;
 use Standings\Controller\HomeController;
 use Standings\Controller\StandingsController;
 
@@ -12,7 +12,7 @@ use Standings\Middleware\AdminMiddleware;
 $webRouter = &$router;
 
 $webRouter->get('/', [HomeController::class, 'index']);
-$webRouter->get('/fixture', [FixtureController::class, 'index']);
+$webRouter->get('/matches', [MatchController::class, 'index']);
 $webRouter->get('/standings', [StandingsController::class, 'index']);
 
 $webRouter->group('auth', function($webRouter) {

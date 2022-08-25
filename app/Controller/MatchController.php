@@ -4,7 +4,7 @@ namespace Standings\Controller;
 
 use Standings\Model\FixtureView;
 
-class FixtureController extends Controller
+class MatchController extends Controller
 {
     public function index()
     {
