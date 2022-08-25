@@ -3,7 +3,7 @@
 use Buki\Router\Router;
 use Standings\Controller\Admin\LeaugeController;
 use Standings\Controller\Admin\MatchController;
-use Standings\Controller\Admin\SeasonController;
+use Standings\Controller\Admin\FixtureController as AdminFixtureController;
 use Standings\Controller\Admin\TeamController;
 use Standings\Controller\AuthController;
 use Standings\Controller\FixtureController;
@@ -42,7 +42,18 @@ try {
         });
 
         $router->get('teams', [TeamController::class, 'index']);
-        $router->get('seasons', [SeasonController::class, 'index']);
+
+        $router->group('fixtures', function($router) {
+            $router->get('', [AdminFixtureController::class, 'index']);
+
+            $router->get('create', [AdminFixtureController::class, 'create']);
+            $router->post('create', [AdminFixtureController::class, 'store']);
+
+            $router->get('edit/:id', [AdminFixtureController::class, 'edit']);
+            $router->post('edit/:id', [AdminFixtureController::class, 'update']);
+
+            $router->get('remove/:id', [AdminFixtureController::class, 'remove']);
+        });
 
         $router->group('leauges', function($router) {
             $router->get('', [LeaugeController::class, 'index']);
@@ -61,6 +72,10 @@ try {
     }, ['before'=> AdminMiddleware::class]);
 
     $router->group('auth', function($router) {
+
+        $router->get('', function (Request $request, Response $response){
+            return redirectTo('/auth/login');
+        });
 
         $router->get('login', [AuthController::class, 'login']);
         $router->post('login', [AuthController::class, 'check']);

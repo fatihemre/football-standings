@@ -1,0 +1,22 @@
+{% extends 'base.twig' %}
+{% block title %}Fikstürü Düzenle{% endblock %}
+{% block content %}
+
+    <div class="form-container">
+        <h3 class="title">Fikstürü Düzenle</h3>
+        <form action="/manage/fixtures/edit/{{ fixture.id }}" method="post">
+
+            <div class="input-row">
+                <label for="display_name">Fikstür Adı:</label>
+                <input type="text" id="display_name" name="display_name" value="{{ fixture.display_name }}">
+            </div>
+            <div class="input-row">
+                <label></label>
+                <button type="submit">Kaydet</button>
+            </div>
+        </form>
+
+    </div>
+
+
+{% endblock %}
