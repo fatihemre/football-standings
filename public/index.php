@@ -46,8 +46,14 @@ try {
 
         $router->group('leauges', function($router) {
             $router->get('', [LeaugeController::class, 'index']);
+
             $router->get('create', [LeaugeController::class, 'create']);
             $router->post('create', [LeaugeController::class, 'store']);
+
+            $router->get('edit/:id', [LeaugeController::class, 'edit']);
+            $router->post('edit/:id', [LeaugeController::class, 'update']);
+
+            $router->get('remove/:id', [LeaugeController::class, 'remove']);
         });
 
         $router->get('matches', [MatchController::class, 'index']);

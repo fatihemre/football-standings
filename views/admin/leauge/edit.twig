@@ -1,0 +1,30 @@
+{% extends 'base.twig' %}
+{% block title %}Ligi Düzenle{% endblock %}
+{% block content %}
+
+    <div class="form-container">
+        <h3 class="title">Ligi Düzenle</h3>
+        <form action="/manage/leauges/edit/{{ leauge.id }}" method="post">
+
+            <div class="input-row">
+                <label for="display_name">Lig Adı:</label>
+                <input type="text" id="display_name" name="display_name" value="{{ leauge.display_name }}">
+            </div>
+            <div class="input-row">
+                <label for="status">Durum:</label>
+                <select name="status" id="status">
+                    {% for index, status in leauge_statuses %}
+                    <option value="{{ index }}" {{ leauge.status == index ? 'selected' : '' }}>{{ status }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="input-row">
+                <label></label>
+                <button type="submit">Kaydet</button>
+            </div>
+        </form>
+
+    </div>
+
+
+{% endblock %}
