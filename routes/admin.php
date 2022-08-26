@@ -7,6 +7,7 @@ use Standings\Controller\Admin\LeaugeController;
 use Standings\Controller\Admin\MatchController;
 use Standings\Controller\Admin\FixtureController;
 use Standings\Controller\Admin\TeamController;
+use Standings\Controller\Admin\XhrController;
 
 use Standings\Middleware\AdminMiddleware;
 
@@ -17,6 +18,9 @@ $adminRouter->group('manage', function($adminRouter){
     $adminRouter->get('', function(Request $request, Response $response) {
         return redirectTo('/manage/leauges');
     });
+
+    $adminRouter->get('xhr-test', [XhrController::class, 'index']);
+    $adminRouter->post('xhr-result', [XhrController::class, 'result']);
 
     $adminRouter->group('teams', function($adminRouter) {
         $adminRouter->get('', [TeamController::class, 'index']);
