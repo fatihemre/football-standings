@@ -1,3 +1,91 @@
 {% extends 'base.twig' %}
 {% block title %}Admin{% endblock %}
-{% block content %}Matches Index{% endblock %}
+{% block content %}
+
+    <div class="matches">
+        {% set today = 'now'|date('Y-m-d H:i:s') %}
+        {% for match in matches %}
+            <div class="match">
+                <div class="clubs">
+                    <div class="club">
+                        <div class="home">
+                            {% set default_crest = '/assets/images/clubs/shield.png' %}
+                            {% set home_crest = '/assets/images/clubs/' ~ match.home_team_short_code|lower ~'.png' %}
+
+                            <img src="{{ ondisk(home_crest) ? home_crest : default_crest }}" alt="{{ match.home_team_name }} Arması">
+
+                            <div class="team">
+                                {{ match.home_team_name }}
+                            </div>
+                        </div>
+                        <div class="score" id="team_{{ match.home_team_id }}">
+                            {{ match.home_team_score }}
+                        </div>
+                    </div>
+                    <div class="club">
+                        <div class="away">
+                            {% set away_crest = '/assets/images/clubs/' ~ match.away_team_short_code|lower ~'.png' %}
+                            <img src="{{ ondisk(away_crest) ? away_crest : default_crest }}" alt="{{ match.away_team_name}} Arması">
+                            <div class="team">{{ match.away_team_name }}</div>
+                        </div>
+                        <div class="score" id="team_{{ match.away_team_id }}">
+                            {{ match.away_team_score }}
+                        </div>
+                    </div>
+                </div>
+                <div class="goal-buttons">
+                    <div class="goal-button">
+                        <button class="goal" data-type="add-goal" data-match="{{ match.id }}" data-team="{{ match.home_team_id }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <button class="goal" data-type="remove-goal" data-match="{{ match.id }}" data-team="{{ match.home_team_id }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm3 10.5a.75.75 0 000-1.5H9a.75.75 0 000 1.5h6z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="goal-button">
+                        <button class="goal" data-type="add-goal" data-match="{{ match.id }}" data-team="{{ match.away_team_id }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <button class="goal" data-type="remove-goal" data-match="{{ match.id }}" data-team="{{ match.away_team_id }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm3 10.5a.75.75 0 000-1.5H9a.75.75 0 000 1.5h6z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            $('.goal').on('click', function(){
+                let match_id = $(this).data('match');
+                let team_id = $(this).data('team');
+                let type = $(this).data('type');
+                site.xhr('/manage/matches/' + type, {
+                    match_id: match_id,
+                    team_id: team_id
+                }, function(response){
+                    // Please change exception handler. Check http_status_codes??????
+                    if(response.type === 'success')
+                    {
+                        let goal = $('#team_' + team_id).html();
+                        if(type === 'add-goal') {
+                            $('#team_' + team_id).html(parseInt(goal) + 1)
+                        } else {
+                            $('#team_' + team_id).html(parseInt(goal) - 1)
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

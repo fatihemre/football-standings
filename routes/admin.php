@@ -19,9 +19,6 @@ $adminRouter->group('manage', function($adminRouter){
         return redirectTo('/manage/leauges');
     });
 
-    $adminRouter->get('xhr-test', [XhrController::class, 'index']);
-    $adminRouter->post('xhr-result', [XhrController::class, 'result']);
-
     $adminRouter->group('teams', function($adminRouter) {
         $adminRouter->get('', [TeamController::class, 'index']);
 
@@ -58,6 +55,11 @@ $adminRouter->group('manage', function($adminRouter){
         $adminRouter->get('remove/:id', [LeaugeController::class, 'remove']);
     });
 
-    $adminRouter->get('matches', [MatchController::class, 'index']);
+    $adminRouter->group('matches', function($adminRouter){
+        $adminRouter->get('', [MatchController::class, 'index']);
+
+        $adminRouter->post('add-goal', [MatchController::class, 'addGoal']);
+        $adminRouter->post('remove-goal', [MatchController::class, 'removeGoal']);
+    });
 
 }, ['before'=> AdminMiddleware::class]);

@@ -388,3 +388,37 @@ Login Page
     background-color: rgba(25, 180, 155, 1);
     font-weight: bold;
 }
+
+.goal-buttons{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.goal-buttons .goal-button{
+    display:flex;
+    margin-bottom:1rem;
+    width:100%;
+}
+.goal-buttons .goal-button:last-child{
+    margin-bottom:0;
+}
+.goal-buttons .goal-button button {
+    width:100%;
+    padding:0;
+    margin:0;
+    border:none;
+    background:transparent;
+    cursor:pointer
+}
+.goal-button button svg{
+    max-width:20px;
+}
+.goal-button button:hover{color:black;}
+.goal-button button:active {color:gray;}
+.add-goal {
+    color:#3c763d
+}
+.remove-goal {
+    color:#a94442;
+}
