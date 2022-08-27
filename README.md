@@ -28,6 +28,7 @@ Herhangi başka bir lig de entegre edilebilir.
 
 
 ## TODO
+- [ ] Proje çoklu dil seçeneğine sahip olacak. Default olarak Türkçe ve İngilizce dilleri eklenebilir.
 - [ ] Swal entegre edilecek ve yönetim panelindeki formların swal içerisinde çalışması sağlanacak.
 - [ ] Birden fazla lig eklenebilmesi ve switch edilebilmesi sağlanacak.
 - [ ] Sezonların switch edilebilmesi sağlanacak.
