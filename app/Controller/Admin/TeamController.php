@@ -3,6 +3,7 @@
 namespace Standings\Controller\Admin;
 
 use Standings\Controller\Controller;
+use Standings\Library\Pagination;
 use Standings\Model\Team;
 use Standings\Model\TeamEntity;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,9 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 class TeamController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $teams = (new Team())->getTeams();
+        $teams = (new Team())->getTeams($request->get('page', 1));
+
         return $this->view('index', ['page'=>'teams', 'teams'=>$teams]);
     }
 

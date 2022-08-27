@@ -21,7 +21,8 @@
             </tr>
             </thead>
             <tbody>
-            {% for team in teams %}
+            {% set teamArray = teams.items is defined ? teams.items : teams %}
+            {% for team in teamArray %}
                 <tr>
                     <td>{{ team.id }}</td>
                     <td>{{ team.display_name }}</td>
@@ -50,6 +51,11 @@
 
             </tbody>
         </table>
+
+        {% if teams.items is defined %}
+            <!-- Pagination -->
+            {{ teams.toHtml|raw }}
+        {% endif %}
 
     </div>
 

@@ -3,10 +3,11 @@
 namespace Standings\Model;
 
 use Standings\Library\Database;
+use Standings\Library\Pagination;
 
 class Team
 {
-    use Database;
+    use Database, Pagination;
 
     public function getTeam(int $team_id): TeamEntity|false
     {
@@ -17,11 +18,22 @@ class Team
         return $sth->fetch();
     }
 
-    public function getTeams(): array|false
+    public function getTeams(int $page=1): array|false
     {
-        // TODO: Gelecekte sayfalama eklenebilir.
-        $sth = $this->connection->query("SELECT * FROM teams");
+        $isPaginated = in_array(Pagination::class, class_uses(Team::class), true);
+        $sql = "SELECT * FROM teams";
+        if($isPaginated) {
+            $totalRecords = $this->connection->query("SELECT count(id) FROM teams");
+            $totalRecords->execute();
+            $paginate = $this->paginate((int) $totalRecords->fetchColumn(), $page, '/manage/teams');
+            $sql .= " LIMIT {$paginate['offset']}, {$paginate['limit']}";
+        }
+        $sth = $this->connection->query($sql);
         $sth->setFetchMode(\PDO::FETCH_CLASS, TeamEntity::class);
+        if($isPaginated) {
+            $paginate['items'] = $sth->fetchAll();
+            return $paginate;
+        }
 
         return $sth->fetchAll();
     }
