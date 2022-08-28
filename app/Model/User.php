@@ -9,7 +9,7 @@ class User
 {
     use Database;
 
-    public function getUser($email, $password)
+    public function getUser($email, $password): UserEntity|false
     {
         $sth = $this->connection->prepare("SELECT * FROM users WHERE email=:email");
         $sth->execute(['email'=>$email]);
