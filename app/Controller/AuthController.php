@@ -3,9 +3,7 @@
 namespace Standings\Controller;
 
 use Standings\Model\User;
-use Standings\Model\FixtureView;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
@@ -25,11 +23,16 @@ class AuthController extends Controller
         $email = $request->get('email');
         $password = $request->get('password');
 
-        $user = (new User())->exists($email, $password);
+        $user = (new User())->getUser($email, $password);
 
         if(!$user) {
             flash('warning', 'User not found');
-            redirectTo('/auth/login');
+            return redirectTo('/auth/login');
+        }
+
+        if(!(password()->verify($user->password, $password))) {
+            flash('warning', 'Username/Password incorrect.');
+            return redirectTo('/auth/login');
         }
 
         session('user', $user);
