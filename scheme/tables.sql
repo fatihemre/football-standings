@@ -1,22 +1,3 @@
--- -------------------------------------------------------------
--- TablePlus 4.8.3(439)
---
--- https://tableplus.com/
---
--- Database: football
--- Generation Time: 2022-08-21 18:45:19.8810
--- -------------------------------------------------------------
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
 CREATE TABLE `leauges` (
    `id` int NOT NULL AUTO_INCREMENT,
    `display_name` varchar(255) DEFAULT NULL,
@@ -30,16 +11,12 @@ CREATE TABLE `fixtures` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-CREATE TABLE `goals` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `match_id` int NOT NULL,
-  `team_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `match_goal_fk` (`match_id`),
-  KEY `team_goal_fk` (`team_id`),
-  CONSTRAINT `match_goal_fk` FOREIGN KEY (`match_id`) REFERENCES `matches` (`id`),
-  CONSTRAINT `team_goal_fk` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
+CREATE TABLE `teams` (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `short_code` varchar(3) DEFAULT NULL,
+    `display_name` varchar(255) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `matches` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -57,12 +34,25 @@ CREATE TABLE `matches` (
   CONSTRAINT `match_home_team_fk` FOREIGN KEY (`home_team_id`) REFERENCES `teams` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=343 DEFAULT CHARSET=utf8;
 
-CREATE TABLE `teams` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `short_code` varchar(3) DEFAULT NULL,
-  `display_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+CREATE TABLE `goals` (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `match_id` int NOT NULL,
+    `team_id` int NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `match_goal_fk` (`match_id`),
+    KEY `team_goal_fk` (`team_id`),
+    CONSTRAINT `match_goal_fk` FOREIGN KEY (`match_id`) REFERENCES `matches` (`id`),
+    CONSTRAINT `team_goal_fk` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `users` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `email` varchar(255) NOT NULL,
+    `display_name` varchar(255) NOT NULL,
+    `password` varchar(255) NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `email_unique` (`email`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `leauges` (`id`, `display_name`, `status`) VALUES
 (1, 'Türkiye - Süper Lig', 1),
@@ -74,66 +64,26 @@ INSERT INTO `leauges` (`id`, `display_name`, `status`) VALUES
 INSERT INTO `fixtures` (`id`, `display_name`) VALUES
 (1, '2022-2023');
 
-INSERT INTO `goals` (`id`, `match_id`, `team_id`) VALUES
-(1, 1, 18),
-(2, 1, 18),
-(3, 2, 17),
-(4, 2, 9),
-(5, 3, 6),
-(6, 5, 10),
-(7, 5, 10),
-(8, 5, 1),
-(9, 5, 1),
-(10, 5, 1),
-(11, 4, 13),
-(12, 4, 13),
-(13, 4, 2),
-(14, 4, 2),
-(15, 4, 2),
-(16, 4, 2),
-(17, 6, 8),
-(18, 7, 5),
-(19, 7, 5),
-(20, 7, 5),
-(21, 7, 5),
-(22, 9, 7),
-(23, 9, 7),
-(24, 9, 7),
-(25, 9, 19),
-(26, 9, 19),
-(27, 9, 19),
-(28, 10, 18),
-(29, 11, 15),
-(30, 13, 1),
-(31, 13, 1),
-(32, 13, 1),
-(33, 12, 10),
-(34, 15, 9),
-(35, 14, 4),
-(36, 16, 2),
-(37, 16, 2),
-(38, 16, 2),
-(39, 16, 6),
-(40, 16, 6),
-(41, 16, 6),
-(42, 18, 7),
-(43, 18, 7),
-(44, 18, 7),
-(45, 18, 7),
-(46, 18, 7),
-(47, 18, 7),
-(48, 19, 8),
-(49, 20, 10),
-(50, 21, 11),
-(51, 21, 9),
-(52, 21, 9),
-(53, 22, 4),
-(54, 22, 4),
-(55, 22, 4),
-(56, 22, 4),
-(57, 22, 4),
-(58, 22, 18),
-(59, 22, 18);
+INSERT INTO `teams` (`id`, `short_code`, `display_name`) VALUES
+(1, 'ADS', 'Adana Demirspor'),
+(2, 'ALN', 'Alanyaspor'),
+(3, 'AKG', 'Ankaragücü'),
+(4, 'ANT', 'Antalyaspor'),
+(5, 'BSK', 'Başakşehir'),
+(6, 'BJK', 'Beşiktaş'),
+(7, 'FB', 'Fenerbahçe'),
+(8, 'GS', 'Galatasaray'),
+(9, 'GFK', 'Gaziantep FK'),
+(10, 'GRS', 'Giresunspor'),
+(11, 'HTY', 'Hatayspor'),
+(12, 'IST', 'İstanbulspor'),
+(13, 'KGR', 'Karagümrük'),
+(14, 'KSP', 'Kasımpaşa'),
+(15, 'KS', 'Kayserispor'),
+(16, 'KON', 'Konyaspor'),
+(17, 'SVS', 'Sivasspor'),
+(18, 'TS', 'Trabzonspor'),
+(19, 'ÜMR', 'Ümraniyespor');
 
 INSERT INTO `matches` (`id`, `match_day`, `fixture_id`, `week`, `home_team_id`, `away_team_id`) VALUES
 (1, '2022-08-05 21:00:00', 1, 1, 12, 18),
@@ -479,33 +429,63 @@ INSERT INTO `matches` (`id`, `match_day`, `fixture_id`, `week`, `home_team_id`, 
 (341, '2023-05-28 00:00:00', 1, 38, 6, 16),
 (342, '2023-05-28 00:00:00', 1, 38, 17, 15);
 
-INSERT INTO `teams` (`id`, `short_code`, `display_name`) VALUES
-(1, 'ADS', 'Adana Demirspor'),
-(2, 'ALN', 'Alanyaspor'),
-(3, 'AKG', 'Ankaragücü'),
-(4, 'ANT', 'Antalyaspor'),
-(5, 'BSK', 'Başakşehir'),
-(6, 'BJK', 'Beşiktaş'),
-(7, 'FB', 'Fenerbahçe'),
-(8, 'GS', 'Galatasaray'),
-(9, 'GFK', 'Gaziantep FK'),
-(10, 'GRS', 'Giresunspor'),
-(11, 'HTY', 'Hatayspor'),
-(12, 'IST', 'İstanbulspor'),
-(13, 'KGR', 'Karagümrük'),
-(14, 'KSP', 'Kasımpaşa'),
-(15, 'KS', 'Kayserispor'),
-(16, 'KON', 'Konyaspor'),
-(17, 'SVS', 'Sivasspor'),
-(18, 'TS', 'Trabzonspor'),
-(19, 'ÜMR', 'Ümraniyespor');
-
-
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+INSERT INTO `goals` (`id`, `match_id`, `team_id`) VALUES
+(1, 1, 18),
+(2, 1, 18),
+(3, 2, 17),
+(4, 2, 9),
+(5, 3, 6),
+(6, 5, 10),
+(7, 5, 10),
+(8, 5, 1),
+(9, 5, 1),
+(10, 5, 1),
+(11, 4, 13),
+(12, 4, 13),
+(13, 4, 2),
+(14, 4, 2),
+(15, 4, 2),
+(16, 4, 2),
+(17, 6, 8),
+(18, 7, 5),
+(19, 7, 5),
+(20, 7, 5),
+(21, 7, 5),
+(22, 9, 7),
+(23, 9, 7),
+(24, 9, 7),
+(25, 9, 19),
+(26, 9, 19),
+(27, 9, 19),
+(28, 10, 18),
+(29, 11, 15),
+(30, 13, 1),
+(31, 13, 1),
+(32, 13, 1),
+(33, 12, 10),
+(34, 15, 9),
+(35, 14, 4),
+(36, 16, 2),
+(37, 16, 2),
+(38, 16, 2),
+(39, 16, 6),
+(40, 16, 6),
+(41, 16, 6),
+(42, 18, 7),
+(43, 18, 7),
+(44, 18, 7),
+(45, 18, 7),
+(46, 18, 7),
+(47, 18, 7),
+(48, 19, 8),
+(49, 20, 10),
+(50, 21, 11),
+(51, 21, 9),
+(52, 21, 9),
+(53, 22, 4),
+(54, 22, 4),
+(55, 22, 4),
+(56, 22, 4),
+(57, 22, 4),
+(58, 22, 18),
+(59, 22, 18);
