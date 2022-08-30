@@ -4,6 +4,7 @@ namespace Standings\Controller\Admin;
 
 use Standings\Controller\BaseController;
 use Standings\Model\ActiveWeek;
+use Standings\Model\Fixture;
 use Standings\Model\FixtureView;
 use Standings\Model\Goal;
 use Standings\Model\GoalEntity;
@@ -13,13 +14,22 @@ use Symfony\Component\HttpFoundation\Response;
 class MatchController extends BaseController
 {
 
-    public function index()
+    public function index(?int $id=null)
     {
-        // TODO: sayfadan hafta seçilebilir.
+        $active_week = $id ?? (new ActiveWeek())->get()->active_week;
+        $weeks = (new Fixture())->getWeeks(1);
 
-        $matches = (new FixtureView())->getMatches(1, (new ActiveWeek())->get()->active_week);
+        if($id > end($weeks)->week)
+            return redirectTo('/manage/matches/' . end($weeks)->week);
 
-        return $this->view('index', ['page'=>'matches', 'matches' => $matches]);
+        $matches = (new FixtureView())->getMatches(1, $active_week);
+
+        return $this->view('index', [
+            'page'=>'matches',
+            'matches' => $matches,
+            'weeks'=> $weeks,
+            'selected_week' => $active_week
+        ]);
     }
 
     /**

@@ -225,6 +225,9 @@ Login Page
     min-width:30%;
     margin-right: 1rem;
 }
+.input-row.auto label{
+    min-width: auto;
+}
 .input-row input, .input-row select {
     padding:.375rem;
     border:1px solid rgba(215,215,215,1);
@@ -422,3 +425,9 @@ Login Page
 .remove-goal {
     color:#a94442;
 }
+
+.select-container{
+    display:flex;
+    margin-bottom: 1rem;
+}
+.week-selector

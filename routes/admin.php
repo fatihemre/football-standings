@@ -55,6 +55,7 @@ $adminRouter->group('manage', function($adminRouter){
 
     $adminRouter->group('matches', function($adminRouter){
         $adminRouter->get('', [MatchController::class, 'index']);
+        $adminRouter->get('/:int', [MatchController::class, 'index']);
 
         $adminRouter->post('add-goal', [MatchController::class, 'addGoal']);
         $adminRouter->post('remove-goal', [MatchController::class, 'removeGoal']);

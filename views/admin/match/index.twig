@@ -2,6 +2,16 @@
 {% block title %}Admin{% endblock %}
 {% block content %}
 
+    <div class="input-row auto">
+        <label for="week-selector">Hafta seçimi: </label>
+        <select name="week-selector" id="week-selector" class="week-selector">
+            {% for row in weeks %}
+            <option {{ selected_week == row.week ? 'selected' : ''}} value="{{ row.week }}">
+                {{ row.week }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
     <div class="matches">
         {% set today = 'now'|date('Y-m-d H:i:s') %}
         {% for match in matches %}
@@ -84,6 +94,11 @@
                         }
                     }
                 });
+            });
+
+            $('#week-selector').on('change', function(){
+                let id = $(this).val();
+                window.location.href = '/manage/matches/' + id;
             });
         });
     </script>

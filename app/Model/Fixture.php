@@ -26,6 +26,13 @@ class Fixture
         return $sth->fetchAll();
     }
 
+    public function getWeeks(int $fixture_id): array|false
+    {
+        $sth = $this->connection->prepare("SELECT week FROM matches WHERE fixture_id=:fixture_id GROUP BY week");
+        $sth->execute(['fixture_id'=>$fixture_id]);
+        return $sth->fetchAll(\PDO::FETCH_OBJ);
+    }
+
     public function insert(FixtureEntity $entity)
     {
         $sth = $this->connection->prepare("INSERT INTO fixtures(display_name) VALUES (:display_name)");
