@@ -1,11 +1,12 @@
 <?php
 
-namespace Standings\Controller;
+namespace Standings\Controller\Web;
 
+use Standings\Controller\BaseController;
 use Standings\Model\Standings;
 use Standings\Model\LastFiveStates;
 
-class StandingsController extends Controller
+class StandingsController extends BaseController
 {
     public function index()
     {

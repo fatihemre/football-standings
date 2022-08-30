@@ -2,16 +2,15 @@
 
 namespace Standings\Controller\Admin;
 
-use Standings\Controller\Controller;
+use Standings\Controller\BaseController;
 use Standings\Model\ActiveWeek;
 use Standings\Model\FixtureView;
 use Standings\Model\Goal;
 use Standings\Model\GoalEntity;
-use Standings\Model\Matches;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class MatchController extends Controller
+class MatchController extends BaseController
 {
 
     public function index()

@@ -2,12 +2,9 @@
 
 namespace Standings\Controller;
 
-use Buki\Router\Router;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class Controller extends \Buki\Router\Http\Controller
+class BaseController extends \Buki\Router\Http\Controller
 {
     protected $view;
     public function __construct()

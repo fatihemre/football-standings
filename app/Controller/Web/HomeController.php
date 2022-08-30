@@ -1,12 +1,12 @@
 <?php
 
-namespace Standings\Controller;
+namespace Standings\Controller\Web;
 
+use Standings\Controller\BaseController;
 use Standings\Model\ActiveWeek;
-use Standings\Model\ActiveWeekEntity;
 use Standings\Model\FixtureView;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
     public function index()
     {

@@ -1,9 +1,9 @@
 <?php
 
-use Standings\Controller\AuthController;
-use Standings\Controller\MatchController;
-use Standings\Controller\HomeController;
-use Standings\Controller\StandingsController;
+use Standings\Controller\Web\AuthController;
+use Standings\Controller\Web\MatchController;
+use Standings\Controller\Web\HomeController;
+use Standings\Controller\Web\StandingsController;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

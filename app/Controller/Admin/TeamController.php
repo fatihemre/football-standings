@@ -2,13 +2,12 @@
 
 namespace Standings\Controller\Admin;
 
-use Standings\Controller\Controller;
-use Standings\Library\Pagination;
+use Standings\Controller\BaseController;
 use Standings\Model\Team;
 use Standings\Model\TeamEntity;
 use Symfony\Component\HttpFoundation\Request;
 
-class TeamController extends Controller
+class TeamController extends BaseController
 {
 
     public function index(Request $request)

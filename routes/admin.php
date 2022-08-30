@@ -7,8 +7,6 @@ use Standings\Controller\Admin\LeaugeController;
 use Standings\Controller\Admin\MatchController;
 use Standings\Controller\Admin\FixtureController;
 use Standings\Controller\Admin\TeamController;
-use Standings\Controller\Admin\XhrController;
-
 use Standings\Middleware\AdminMiddleware;
 
 $adminRouter = &$router;

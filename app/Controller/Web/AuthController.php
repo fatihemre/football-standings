@@ -1,11 +1,12 @@
 <?php
 
-namespace Standings\Controller;
+namespace Standings\Controller\Web;
 
+use Standings\Controller\BaseController;
 use Standings\Model\User;
 use Symfony\Component\HttpFoundation\Request;
 
-class AuthController extends Controller
+class AuthController extends BaseController
 {
     public function login()
     {

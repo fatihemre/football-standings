@@ -2,12 +2,12 @@
 
 namespace Standings\Controller\Admin;
 
-use Standings\Controller\Controller;
+use Standings\Controller\BaseController;
 use Standings\Model\Leauge;
 use Standings\Model\LeaugeEntity;
 use Symfony\Component\HttpFoundation\Request;
 
-class LeaugeController extends Controller
+class LeaugeController extends BaseController
 {
 
     public function index()

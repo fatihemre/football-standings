@@ -2,12 +2,12 @@
 
 namespace Standings\Controller\Admin;
 
-use Standings\Controller\Controller;
+use Standings\Controller\BaseController;
 use Standings\Model\Fixture;
 use Standings\Model\FixtureEntity;
 use Symfony\Component\HttpFoundation\Request;
 
-class FixtureController extends Controller
+class FixtureController extends BaseController
 {
 
     public function index()

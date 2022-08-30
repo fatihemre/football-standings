@@ -1,10 +1,11 @@
 <?php
 
-namespace Standings\Controller;
+namespace Standings\Controller\Web;
 
+use Standings\Controller\BaseController;
 use Standings\Model\FixtureView;
 
-class MatchController extends Controller
+class MatchController extends BaseController
 {
     public function index()
     {
