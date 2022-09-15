@@ -29,4 +29,10 @@ class Matches
 
         return $sth->fetchAll();
     }
+
+    public function updateMatchStatus(int $match_id, int $status): bool
+    {
+        $sth = $this->connection->prepare("UPDATE matches SET status=:status WHERE id=:match_id");
+        return $sth->execute(['status'=>$status, 'match_id'=>$match_id]);
+    }
 }

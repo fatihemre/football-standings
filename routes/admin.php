@@ -59,6 +59,8 @@ $adminRouter->group('manage', function($adminRouter){
 
         $adminRouter->post('add-goal', [MatchController::class, 'addGoal']);
         $adminRouter->post('remove-goal', [MatchController::class, 'removeGoal']);
+
+        $adminRouter->post('change-match-status', [MatchController::class, 'changeMatchStatus']);
     });
 
 }, ['before'=> AdminMiddleware::class]);

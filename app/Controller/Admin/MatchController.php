@@ -8,6 +8,8 @@ use Standings\Model\Fixture;
 use Standings\Model\FixtureView;
 use Standings\Model\Goal;
 use Standings\Model\GoalEntity;
+use Standings\Model\MatchEntity;
+use Standings\Model\Matches;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -27,6 +29,7 @@ class MatchController extends BaseController
         return $this->view('index', [
             'page'=>'matches',
             'matches' => $matches,
+            'match_statuses' => MatchEntity::$statusMap,
             'weeks'=> $weeks,
             'selected_week' => $active_week
         ]);
@@ -73,6 +76,22 @@ class MatchController extends BaseController
             $response->send();
         }
 
+    }
+
+    public function changeMatchStatus(Request $request, Response $response)
+    {
+        $data = json_decode($request->getContent());
+        $match_id = (int) $data?->match_id;
+        $status = (int) $data?->status;
+
+        try {
+            $match = (new Matches())->updateMatchStatus($match_id, $status);
+            $response->setContent(json_encode(['type'=>$match ? 'success' : 'failed']));
+        } catch (\Throwable $e) {
+            $response->setContent(json_encode(['type'=>'failed', 'response'=>$e->getMessage()]));
+        } finally {
+            $response->send();
+        }
     }
 
 }

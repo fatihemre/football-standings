@@ -25,6 +25,7 @@ CREATE TABLE `matches` (
   `week` int NOT NULL,
   `home_team_id` int DEFAULT NULL,
   `away_team_id` int DEFAULT NULL,
+  `status` int DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `match_fixture_fk` (`fixture_id`),
   KEY `match_home_team_fk` (`home_team_id`),

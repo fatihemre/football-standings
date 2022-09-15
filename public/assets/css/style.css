@@ -82,12 +82,13 @@ header h5{
     grid: '1 1';
 }
 .match{
+    position: relative;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap:10px;
     grid-auto-rows: minmax(65px, auto);
     background:rgba(245,245,245,1);
-    padding:1.5rem 2rem;
+    padding:2.5rem 2rem 1.5rem;
 }
 .clubs{
     grid-column: 1 / 3;
@@ -126,6 +127,46 @@ header h5{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.match-status{
+    position:absolute;
+    background: rgba(221, 221, 221, 1);
+    left:0;
+    right:0;
+    text-align: right;
+    padding: 3px 6px;
+}
+.status-buttons {
+    position:absolute;
+    z-index: 2;
+    left:0;
+    display: flex;
+    align-items: center;
+    height: 24px;
+}
+.status-buttons a{
+    text-decoration: none;
+    color:inherit;
+    display: inline-block;
+    width: 14px;
+    border-radius: 3px;
+    height: 14px;
+    margin:0 2px;
+    padding:2px;
+    background-color:rgba(200, 200, 200, 1);
+}
+.status-buttons a:hover{
+    background-color:rgba(0,0,0, 1);
+    color: rgba(255, 255, 255, 1);
+}
+.status-buttons a.active{
+    background-color: rgba(25, 180, 155, 1);
+    color: rgba(255, 255, 255, 1);
+}
+.status-buttons a svg{
+    width:14px;
+    height:14px;
 }
 
 .standings {
@@ -417,8 +458,9 @@ Login Page
 .goal-button button svg{
     max-width:20px;
 }
-.goal-button button:hover{color:black;}
-.goal-button button:active {color:gray;}
+.goal-button button:hover:not(:disabled){color:black;}
+.goal-button button:disabled{cursor: not-allowed;}
+.goal-button button:active:not(:disabled) {color:gray;}
 .add-goal {
     color:#3c763d
 }
